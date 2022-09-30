@@ -23,7 +23,43 @@ const createUser = (req, res) => {
     photoURL: req.body.photoURL,
   };
   users.push(newUser);
-  res.status(200).json(newUser);
+  res.status(201).json(newUser);
 };
 
-module.exports = { getRandomUser, getAllUser, createUser };
+// update user
+const updateUser = (req, res) => {
+  const userId = req.params.id;
+  const { name, gender, contact, address, photoURL } = req.body;
+  users
+    .filter((user) => userId === user.id)
+    .map((selectedUser) => {
+      selectedUser.name = name;
+      selectedUser.gender = gender;
+      selectedUser.contact = contact;
+      selectedUser.address = address;
+      selectedUser.address = address;
+      selectedUser.photoURL = photoURL;
+    });
+  res.status(200).json(users);
+};
+
+// update multiple user
+const updateMultipleUser = (req, res) => {
+  res.status(200).json(users);
+};
+
+// delete user
+const deleteUser = (req, res) => {
+  const userId = req.params.id;
+  users = users.filter((user) => user.id !== userId);
+  res.status(200).json(users);
+};
+
+module.exports = {
+  getRandomUser,
+  getAllUser,
+  createUser,
+  updateUser,
+  updateMultipleUser,
+  deleteUser,
+};
