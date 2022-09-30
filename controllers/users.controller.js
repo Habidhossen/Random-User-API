@@ -45,6 +45,18 @@ const updateUser = (req, res) => {
 
 // update multiple user
 const updateMultipleUser = (req, res) => {
+  const userId = req.params.id;
+  const { name, gender, contact, address, photoURL } = req.body;
+  users
+    .filter((user) => userId === user.id)
+    .map((selectedUser) => {
+      selectedUser.name = name;
+      selectedUser.gender = gender;
+      selectedUser.contact = contact;
+      selectedUser.address = address;
+      selectedUser.address = address;
+      selectedUser.photoURL = photoURL;
+    });
   res.status(200).json(users);
 };
 
